@@ -2,3 +2,14 @@
     margin: auto;
     text-align: center;
 }
+
+.text-muted {
+    --bs-text-opacity: 1;
+    color: #6c757d !important;
+  }
+  .text-center {
+    text-align: center !important;
+  }
+  small, .small {
+    font-size: 0.875em;
+  }
