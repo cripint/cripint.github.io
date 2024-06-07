@@ -42,15 +42,16 @@
 }
 </style>
 
-<h1 id="question"></h1>
+
+<h1>How Reasonable is the statement: </h1><h1 id="question"></h1>
 <div id="container"></div>
 
 <div class="slidecontainer">
     <input type="range" min="0" max="100" value="50" class="slider" id="myRange">
   </div>
 
-<input type="number" id="buttonXlim" value=0>
-<input type="button" id="showXlim" value="Reveal">
+<input type="button" id="buttonXlim" value="Next">
+<input type="button" id="showXlim" value="Guess">
 <script type="module">
 window.questionIdx = 0;
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
@@ -128,9 +129,12 @@ var idx=0;
 // Append the SVG element.
 container.append(svg.node());
 
+var questionIdx=0;
+
 
 function updatePlot() {
-    var xlim = this.value % data.length;
+    questionIdx+=1;
+    var xlim = questionIdx % data.length;
     var txt = data[xlim]["summary"];
     question.textContent = txt;  
 
@@ -166,7 +170,10 @@ function updatePlot() {
 }
 
 function goPlot() {
-    var xlim = d3.select("#buttonXlim").property("value") % data.length;
+    //d3.select("#buttonXlim").property("value") % data.lengt
+    d3.select("#myRange").value = 50;
+    
+    var xlim =  questionIdx % data.length;
     var scores =  data[xlim]["scores"];
     var idx=0;
 
@@ -183,14 +190,14 @@ function goPlot() {
     var spacing = 30;
     svg.append("circle")
         .attr("cx", x(score))
-        .attr("cy", idx*spacing + 250 -4)
+        .attr("cy", idx*spacing + 220 -4)
         .attr("r", 5);
 
 
     svg.append("text")
         .text(key)
         .attr("x", x(score)+8)
-        .attr("y", idx*spacing + 250);
+        .attr("y", idx*spacing + 220);
         //.attr("cx", x(score))
         //.attr("cy", 300);
         //.attr("r", 10);
@@ -201,7 +208,7 @@ function goPlot() {
 }
 
 // Add an event listener to the button created in the html part
-d3.select("#buttonXlim").on("input",  updatePlot)
+d3.select("#buttonXlim").on("click",  updatePlot)
 d3.select("#showXlim").on("click", goPlot )
 
 
