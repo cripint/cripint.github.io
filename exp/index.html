@@ -6,6 +6,9 @@
 
 <style>
 
+h1{
+  font-size: 1.5em;
+}
 
 .montserrat-blurb {
   font-family: "Montserrat", sans-serif;
@@ -64,7 +67,7 @@
 </style>
 
 <div style="text-align: center;">
-<h1 class="montserrat-blurb">How Reasonable is the statement: </h1><h1 class="montserrat-txt" id="question" style="font-size: 5em;"></h1>
+<h1 class="montserrat-blurb">How Reasonable is the statement? </h1><h1 class="montserrat-txt" id="question" style="font-size: 5em;"></h1>
 
 <div id="container"></div>
 
@@ -145,7 +148,7 @@ svg.append("g")
     .call(d3.axisBottom(x));
 
 var i = window.questionIdx % data.length;
-var txt = data[i]["summary"];
+var txt = "\""+data[i]["summary"] + "\"";
 question.append(txt);    
 var scores =  data[i]["scores"];
 var idx=0;
@@ -181,7 +184,7 @@ var questionIdx=0;
 function updatePlot() {
     questionIdx+=1;
     var xlim = questionIdx % data.length;
-    var txt = data[xlim]["summary"];
+    var txt = "\""+data[xlim]["summary"] + "\"";
     question.textContent = txt;  
 
     var scores =  data[xlim]["scores"];
