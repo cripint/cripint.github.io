@@ -51,6 +51,7 @@
   </div>
 
 <input type="button" id="buttonXlim" value="Next">
+<input type="button" id="buttonShrug" value="Shrug">
 <input type="button" id="showXlim" value="Guess">
 <script type="module">
 window.questionIdx = 0;
@@ -171,12 +172,20 @@ function updatePlot() {
 // }
 }
 
+function goPlotRecord(){
+  var xlim =  questionIdx % data.length;
+  var v = d3.select("#myRange").property("value");
+  v = Number(v);
+  user_guesses[xlim].push(v);
+  goPlot();
+}
+
 function goPlot() {
   var xlim =  questionIdx % data.length;
 
   var v = d3.select("#myRange").property("value");
   v = Number(v);
-    user_guesses[xlim].push(v);
+   
 
     //console.log(d3.select("#myRange").value);
 
@@ -201,7 +210,9 @@ function goPlot() {
     svg.append("circle")
         .attr("cx", x(score))
         .attr("cy", idx*spacing + 220 -4)
-        .attr("r", 5);
+        .attr("r", 5)
+        .style("fill", "red")
+        .style("stroke", "black");;
 
 
     svg.append("text")
@@ -228,8 +239,9 @@ function goPlot() {
       svg.append("circle")
         .attr("cx", x(s))
         .attr("cy", 150)
-        .attr("r", 4)
-        .style("fill", "green");
+        .attr("r", 3)
+        .style("fill", "green")
+        .style("stroke", "black");
     }
 
 
@@ -237,7 +249,8 @@ function goPlot() {
 
 // Add an event listener to the button created in the html part
 d3.select("#buttonXlim").on("click",  updatePlot)
-d3.select("#showXlim").on("click", goPlot )
+d3.select("#buttonShrug").on("click",  goPlot)
+d3.select("#showXlim").on("click", goPlotRecord )
 
 
 </script>
