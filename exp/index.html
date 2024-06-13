@@ -1,7 +1,28 @@
 <!DOCTYPE html>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
 <style>
-    .slidecontainer {
+
+
+.montserrat-blurb {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.montserrat-txt {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+.slidecontainer {
   width: 100%; /* Width of the outside container */
 }
 
@@ -42,17 +63,25 @@
 }
 </style>
 
+<div style="text-align: center;">
+<h1 class="montserrat-blurb">How Reasonable is the statement: </h1><h1 class="montserrat-txt" id="question" style="font-size: 5em;"></h1>
 
-<h1>How Reasonable is the statement: </h1><h1 id="question"></h1>
 <div id="container"></div>
 
 <div class="slidecontainer">
     <input type="range" min="0" max="100" value="50" class="slider" id="myRange">
   </div>
 
-<input type="button" id="buttonXlim" value="Next">
-<input type="button" id="buttonShrug" value="Shrug">
-<input type="button" id="showXlim" value="Guess">
+<div class="btns" style="padding:50px">
+  <input type="button" id="buttonLeft" value="<">
+
+  <input type="button" id="buttonShrug" value="Shrug">
+  <input type="button" id="showXlim" value="Guess">
+
+  <input type="button" id="buttonRight" value=">">
+</div>
+</div>
+
 <script type="module">
 window.questionIdx = 0;
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
@@ -73,10 +102,24 @@ var data = [
                     "gpt3": 0.0,
                     "claude": 0.0,
                     "llama3": 4.2}
+        },
+        {"summary": "A wheelchair is joyful",
+         "scores": {"gemini": 1.0,
+                    "gpt4o": 1.5,
+                    "gpt3": 1.0,
+                    "claude": 1.5,
+                    "llama3": 1.8}
         }
+        
     ];
 
-var user_guesses = [[], []];
+var user_guesses = [[],[], []];
+// console.log(data.length);
+// for(var i ; i <= data.length; i++){
+//   user_guesses.push([]);
+// }
+
+console.log(user_guesses);
 
 // Declare the chart dimensions and margins.
 const width = 640;
@@ -248,7 +291,8 @@ function goPlot() {
 }
 
 // Add an event listener to the button created in the html part
-d3.select("#buttonXlim").on("click",  updatePlot)
+d3.select("#buttonLeft").on("click",  updatePlot)
+d3.select("#buttonRight").on("click",  updatePlot)
 d3.select("#buttonShrug").on("click",  goPlot)
 d3.select("#showXlim").on("click", goPlotRecord )
 
