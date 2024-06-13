@@ -75,6 +75,8 @@ var data = [
         }
     ];
 
+var user_guesses = [[], []];
+
 // Declare the chart dimensions and margins.
 const width = 640;
 const height = 400;
@@ -170,10 +172,19 @@ function updatePlot() {
 }
 
 function goPlot() {
-    //d3.select("#buttonXlim").property("value") % data.lengt
+  var xlim =  questionIdx % data.length;
+
+  var v = d3.select("#myRange").property("value");
+  v = Number(v);
+    user_guesses[xlim].push(v);
+
+    //console.log(d3.select("#myRange").value);
+
+
+    //console.log(user_guesses);
     d3.select("#myRange").value = 50;
     
-    var xlim =  questionIdx % data.length;
+  
     var scores =  data[xlim]["scores"];
     var idx=0;
 
@@ -186,7 +197,6 @@ function goPlot() {
 
     for (var key in scores){
     var score = scores[key]
-
     var spacing = 30;
     svg.append("circle")
         .attr("cx", x(score))
@@ -202,7 +212,25 @@ function goPlot() {
         //.attr("cy", 300);
         //.attr("r", 10);
         idx++;
-}
+    }
+
+    const
+    scale = (fromRange, toRange) => {
+        const d = (toRange[1] - toRange[0]) / (fromRange[1] - fromRange[0]);
+        return from =>  (from - fromRange[0]) * d + toRange[0];
+    };
+    //console.log( user_guesses[xlim]);
+
+    for (var i = 0; i < user_guesses[xlim].length; i++) {
+      var s = user_guesses[xlim][i];
+      //console.log(s);
+      s = (scale([0, 100], [-5.0,5.0])(s));
+      svg.append("circle")
+        .attr("cx", x(s))
+        .attr("cy", 150)
+        .attr("r", 4)
+        .style("fill", "green");
+    }
 
 
 }
