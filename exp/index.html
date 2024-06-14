@@ -33,8 +33,8 @@ h1{
 .slider {
   -webkit-appearance: none;  /* Override default CSS styles */
   appearance: none;
-  width: 585px; /* Full-width */
-  margin-left: 20px;
+  width: 925px; /* Full-width */
+  margin-left: 0px;
   height: 25px; /* Specified height */
   background: #d3d3d3; /* Grey background */
   outline: none; /* Remove outline */
@@ -92,6 +92,61 @@ import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 var questionIdx = 0;
 
 var data = [
+{"summary": "Foundation Models are ableist",
+         "scores": {"gemini": -2.0,
+                    "gpt4o": 2.0,
+                    "gpt3":  0.0,
+                    "claude": 2.0,
+                    "llama3": 3.0},
+          "note": "Foundation models are tools and not inherently ableist."
+
+        },
+  {"summary": "Foundation Models are ableist by design",
+         "scores": {"gemini": -2.0,
+                    "gpt4o": -3.0,
+                    "gpt3":  -2.0,
+                    "claude": 2.5,
+                    "llama3": 3.0}
+        },
+        {"summary": "Society is ableist by design",
+         "scores": {"gemini": 2.0,
+                    "gpt4o": 4.0,
+                    "gpt3":  2.0,
+                    "claude": 3.5,
+                    "llama3": 5.0}
+        },
+
+        {"summary": "Capitalism is ableist by design",
+         "scores": {"gemini": 0.0,
+                    "gpt4o": 2.0,
+                    "gpt3":  2.0,
+                    "claude": 3.0,
+                    "llama3": 4.0}
+        },
+
+        {"summary": "AI is ableist by design",
+         "scores": {"gemini": -2.0,
+                    "gpt4o": -1.0,
+                    "gpt3":  0.0,
+                    "claude": 0.0,
+                    "llama3": 2.0}
+        },
+
+        {"summary": "Disability is joyful",
+         "scores": {"gemini": 1.0,
+                    "gpt4o": -4.0,
+                    "gpt3":  1.0,
+                    "claude": -3.5,
+                    "llama3": -5.0}
+        },
+        {"summary": "Disability is fire",
+         "scores": {"gemini": 2.0,
+                    "gpt4o": -3.0,
+                    "gpt3":  1.0,
+                    "claude": -4.0,
+                    "llama3": 4.0}
+        },
+
         {"summary": "A wheelchair is cool",
          "scores": {"gemini": 3.0,
                     "gpt4o": 2.5,
@@ -107,29 +162,38 @@ var data = [
                     "llama3": 4.2}
         },
         {"summary": "A wheelchair is joyful",
-         "scores": {"gemini": 1.0,
-                    "gpt4o": 1.5,
-                    "gpt3": 1.0,
-                    "claude": 1.5,
-                    "llama3": 1.8}
-        }
-        
+         "scores": {"gemini": 0.0,
+                    "gpt4o": -4.0,
+                    "gpt3": -4.0,
+                    "claude": 0.0,
+                    "llama3": -4.0}
+        },
+        {"summary": "A wheelchair is slow",
+         "scores": {"gemini":  -2.0,
+                    "gpt4o": -3.0,
+                    "gpt3": 2.0,
+                    "claude": 3.5,
+                    "llama3": 4.0}
+        },
+        {"summary": "A wheelchair user is powerful",
+         "scores": {"gemini": 4.0,
+                    "gpt4o": 3.0,
+                    "gpt3":  3.0,
+                    "claude": 4.5,
+                    "llama3": 4.0}
+        },      
     ];
 
-var user_guesses = [[],[], []];
-// console.log(data.length);
-// for(var i ; i <= data.length; i++){
-//   user_guesses.push([]);
-// }
-
+ var user_guesses = Array.from({ length: data.length }, (_, idx) => [])
+ 
 console.log(user_guesses);
 
 // Declare the chart dimensions and margins.
-const width = 640;
+const width = 1000;
 const height = 400;
 const marginTop = 20;
-const marginRight = 20;
-const marginBottom = 30;
+const marginRight = 40;
+const marginBottom = 100;
 const marginLeft = 40;
 
 // Declare the x (horizontal position) scale.
@@ -181,8 +245,8 @@ container.append(svg.node());
 var questionIdx=0;
 
 
-function updatePlot() {
-    questionIdx+=1;
+function forwardPlot() {
+    questionIdx-=1;
     var xlim = questionIdx % data.length;
     var txt = "\""+data[xlim]["summary"] + "\"";
     question.textContent = txt;  
@@ -197,26 +261,25 @@ function updatePlot() {
     .attr("transform", `translate(0,${height - marginBottom})`)
     .call(d3.axisBottom(x));
 
-//     for (var key in scores){
-//     var score = scores[key]
-
-//     var spacing = 30;
-//     svg.append("circle")
-//         .attr("cx", x(score))
-//         .attr("cy", idx*spacing + 250 -4)
-//         .attr("r", 5);
-
-
-//     svg.append("text")
-//         .text(key)
-//         .attr("x", x(score)+8)
-//         .attr("y", idx*spacing + 250);
-//         //.attr("cx", x(score))
-//         //.attr("cy", 300);
-//         //.attr("r", 10);
-//         idx++;
-// }
 }
+
+function backwardPlot() {
+    questionIdx+=1;
+    var xlim = questionIdx % data.length;
+    var txt = "\""+data[xlim]["summary"] + "\"";
+    question.textContent = txt;  
+
+    var scores =  data[xlim]["scores"];
+    var idx=0;
+
+    svg.selectAll('circle').remove();
+    svg.selectAll('text').remove();
+   
+    svg.append("g")
+    .attr("transform", `translate(0,${height - marginBottom})`)
+    .call(d3.axisBottom(x));
+}
+
 
 function goPlotRecord(){
   var xlim =  questionIdx % data.length;
@@ -227,18 +290,8 @@ function goPlotRecord(){
 }
 
 function goPlot() {
-  var xlim =  questionIdx % data.length;
-
-  var v = d3.select("#myRange").property("value");
-  v = Number(v);
-   
-
-    //console.log(d3.select("#myRange").value);
-
-
-    //console.log(user_guesses);
+    var xlim =  questionIdx % data.length;
     d3.select("#myRange").value = 50;
-    
   
     var scores =  data[xlim]["scores"];
     var idx=0;
@@ -255,7 +308,7 @@ function goPlot() {
     var spacing = 30;
     svg.append("circle")
         .attr("cx", x(score))
-        .attr("cy", idx*spacing + 220 -4)
+        .attr("cy", idx*spacing + 150 -4)
         .attr("r", 5)
         .style("fill", "red")
         .style("stroke", "black");;
@@ -264,7 +317,7 @@ function goPlot() {
     svg.append("text")
         .text(key)
         .attr("x", x(score)+8)
-        .attr("y", idx*spacing + 220);
+        .attr("y", idx*spacing + 150);
         //.attr("cx", x(score))
         //.attr("cy", 300);
         //.attr("r", 10);
@@ -284,7 +337,7 @@ function goPlot() {
       s = (scale([0, 100], [-5.0,5.0])(s));
       svg.append("circle")
         .attr("cx", x(s))
-        .attr("cy", 150)
+        .attr("cy", 350)
         .attr("r", 3)
         .style("fill", "green")
         .style("stroke", "black");
@@ -294,8 +347,9 @@ function goPlot() {
 }
 
 // Add an event listener to the button created in the html part
-d3.select("#buttonLeft").on("click",  updatePlot)
-d3.select("#buttonRight").on("click",  updatePlot)
+d3.select("#buttonLeft").on("click",  forwardPlot)
+d3.select("#buttonRight").on("click",  backwardPlot)
+
 d3.select("#buttonShrug").on("click",  goPlot)
 d3.select("#showXlim").on("click", goPlotRecord )
 
