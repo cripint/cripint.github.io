@@ -1,0 +1,520 @@
+
+<!DOCTYPE html>
+<style>
+
+circle {
+  fill: cadetblue;
+}
+line {
+  stroke: #ccc;
+}
+text {
+  text-anchor: middle;
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  fill: #666;
+  font-size: 16px;
+}
+
+    
+</style>
+
+<div id="container"></div>
+
+<div id="content">
+    <svg width="1800", height="1800" >
+      <g class="links"></g>
+      <g class="nodes"></g>
+    </svg>
+ </div>
+
+
+<script src="https://d3js.org/d3.v7.js"></script>
+<script type="module">
+
+import {forceSimulation, forceCollide, forceX} from "https://cdn.jsdelivr.net/npm/d3-force@3/+esm";
+
+var width = 1800, height = 1800
+
+var nodes = [
+	{name: 'A'},
+	{name: 'B'},
+	{name: 'C'},
+	{name: 'D'},
+	{name: 'E'},
+	{name: 'F'},
+	{name: 'G'},
+	{name: 'H'},
+]
+
+var links = [
+	{source: 0, target: 1},
+	{source: 0, target: 2},
+	{source: 0, target: 3},
+	{source: 1, target: 6},
+	{source: 3, target: 4},
+	{source: 3, target: 7},
+	{source: 4, target: 5},
+	{source: 4, target: 7}
+]
+
+
+var nodes = [
+{name: 'Ableism', distance:  0},
+{name: 'Yoga', distance:  40},
+{name: 'Wizard', distance:  -80},
+{name: 'wizard', distance:  -50},
+{name: 'Whispering', distance:  -20},
+{name: 'Whisper', distance:  -80},
+{name: 'Whimsyfication', distance:  -80},
+{name: 'Whimsyburger', distance:  -50},
+{name: 'Whimsy', distance:  -80},
+{name: 'Whimsy', distance:  -50},
+{name: 'Whimsy', distance:  -20},
+{name: 'Wheelchair', distance:  -80},
+{name: 'Wheelchair', distance:  -20},
+{name: 'Unicorn', distance:  -50},
+{name: 'Unconscious bias', distance:  20},
+{name: 'Typing speed tests', distance:  70},
+{name: 'Time', distance:  40},
+{name: 'Tennis', distance:  -20},
+{name: 'Technology', distance:  70},
+{name: 'Technology', distance:  20},
+{name: 'Syllabus', distance:  20},
+{name: 'Sudoku', distance:  -60},
+{name: 'Stairs', distance:  -50},
+{name: 'Stairlift', distance:  -90},
+{name: 'Staircases', distance:  -80},
+{name: 'Staircase', distance:  -20},
+{name: 'Squid', distance:  -90},
+{name: 'Sports', distance:  30},
+{name: 'Sparklepunk', distance:  -50},
+{name: 'Sorbet', distance:  -80},
+{name: 'Sociology', distance:  -20},
+{name: 'Sociologist', distance:  -80},
+{name: 'Society', distance:  80},
+{name: 'Soccer', distance:  -80},
+{name: 'Silence', distance:  -20},
+{name: 'Sign Language', distance:  -99},
+{name: 'Puzzle', distance:  -90},
+{name: 'Punctuation', distance:  -50},
+{name: 'Productivity', distance:  40},
+{name: 'Pity', distance: 70},
+{name: 'Pineapples', distance:  -80},
+{name: 'Pianos', distance:  -70},
+{name: 'Pedagogy', distance:  90},
+{name: 'Optimism', distance:  -50},
+{name: 'Nurturing', distance:  -80},
+{name: 'Nursing', distance:  -20},
+{name: 'Nostalgia', distance:  -50},
+{name: 'Ninja', distance:  -100},
+{name: 'Nike', distance:  -20},
+{name: 'Neurotypical', distance: -20},
+{name: 'neurotypical', distance:  -80},
+{name: 'Neurology', distance:  -20},
+{name: 'Neurologist', distance:  -20},
+{name: 'Neurodiversity', distance:  -20},
+{name: 'Neurodiversity advocate', distance:  -20},
+{name: 'Neurodiverse', distance:  -80},
+{name: 'neurodiverse', distance:  -50},
+{name: 'Netflix', distance:  30},
+{name: 'Nebulon', distance:  -50},
+{name: 'Mondays', distance:  -90},
+{name: 'Mirrors', distance:  -50},
+{name: 'Mathematics', distance:  20},
+{name: 'Math', distance:  20},
+{name: 'Marathon', distance:  60},
+{name: 'Loud music festivals', distance:  85},
+{name: 'Language', distance:  80},
+{name: 'Language', distance:  40},
+{name: 'Labyrinth', distance:  -90},
+{name: 'inspirational', distance:  1},
+{name: 'Infastructure', distance:  80},
+{name: 'Inaccessible', distance:  80},
+{name: 'Ignorance', distance: 50},
+{name: 'Humanity', distance:  -20},
+{name: 'High-heel shoes', distance:  90},
+{name: 'gymnast', distance:  -20},
+{name: 'Gravity', distance:  -50},
+{name: 'Google', distance:  -50},
+{name: 'Google', distance:  -50},
+{name: 'Google Maps', distance:  20},
+{name: 'Glitter', distance:  0},
+{name: 'genius', distance:  -50},
+{name: 'Genius', distance:  -20},
+{name: 'genius', distance:  -20},
+{name: 'Gardening', distance:  -80},
+{name: 'fidgety', distance:  -80},
+{name: 'Fashion', distance:  20},
+{name: 'Expectations', distance:  60},
+{name: 'Exclusionary', distance:  80},
+{name: 'Empathy', distance:  -80},
+{name: 'Emoji', distance:  80},
+{name: 'Disability', distance:  -90},
+{name: 'Curriculum', distance:  50},
+{name: 'Cupcakes', distance:  20},
+{name: 'Cryptography', distance:  20},
+{name: 'Corgi', distance:  -50},
+{name: 'Coffee', distance:  -90},
+{name: 'Carpentry', distance:  -80},
+{name: 'Capitalism', distance:  80},
+{name: 'Candy', distance:  1},
+{name: 'Bureaucracy', distance:  90},
+{name: 'Braille', distance:  -95},
+{name: 'Beauty', distance:  60},
+{name: 'Architecture', distance:  60},
+{name: 'Algorithms', distance:  60},
+{name: 'AI', distance:  60},
+{name: 'Accommodator', distance: -50},
+{name: 'Accessible design', distance:  -100},
+{name: 'Accessibility', distance:  -100},
+{name: 'Ignorance', distance:  20},
+{name: 'Normativity', distance:  90},
+{name: 'Telepathy', distance:  20},
+{name: 'Pineapple', distance:  -50},
+{name: 'Pajamas', distance:  -80},
+{name: 'Education', distance:  70},
+{name: 'Twitter', distance:  40},
+{name: 'Kale', distance:  -20},
+{name: 'Bubblewrap', distance:  -50},
+{name: 'Perfectionism', distance:  95},
+{name: 'Instagram', distance:  50},
+{name: 'Kaleidoscopes', distance:  15},
+{name: 'Typography', distance:  40},
+{name: 'Sandcastles', distance:  10},
+{name: 'Lullabies', distance:  35},
+{name: 'Astronomy', distance:  50},
+{name: 'Baking', distance:  28},
+{name: 'Corgis', distance:  -80},
+{name: 'Sass', distance:  -20},
+{name: 'Piano', distance:  -50},
+{name: 'Sandwiches', distance:  5},
+{name: 'Typewriters', distance:  30},
+{name: 'Fjords', distance:  15},
+{name: 'Quiche', distance:  0},
+{name: 'Aromatherapy', distance:  40},
+{name: 'Typing', distance:  20},
+{name: 'Sarcasm', distance:  40},
+{name: 'Ableism itself', distance:  -100},
+{name: 'Pretentiousness', distance:  20},
+{name: 'Complacency', distance:  40},
+{name: 'Privilege', distance:  90},
+{name: 'Ambition', distance:  50},
+{name: 'Forgiveness', distance:  90},
+{name: 'Stereotyping', distance:  95},
+{name: 'Cafes', distance:  40},
+{name: 'Perfection', distance:  60},
+{name: 'Able-bodiedness', distance:  95},
+{name: 'Norms', distance:  75},
+{name: 'The Patriarchy', distance:  90},
+{name: 'Pinterest', distance:  50},
+{name: 'Politics', distance:  95},
+{name: 'Neuroplasticity', distance:  20},
+{name: 'Socks', distance:  -30},
+{name: 'Neuroscience', distance:  90},
+{name: 'Quantum', distance:  -90},
+{name: 'Biscotti', distance:  10},
+{name: 'Punctuality', distance:  40},
+{name: 'Fjord', distance:  5}
+]
+
+ var links = [
+{source: 0, target: 1, distance:  -80},
+{source: 0, target: 2, distance:  -50},
+{source: 0, target: 3, distance:  -20},
+{source: 0, target: 4, distance:  -80},
+{source: 0, target: 5, distance:  -80},
+{source: 0, target: 6, distance:  -50},
+{source: 0, target: 7, distance:  -80},
+{source: 0, target: 8, distance:  -50},
+{source: 0, target: 9, distance:  -20},
+{source: 0, target: 10, distance:  -80},
+{source: 0, target: 11, distance:  -20},
+{source: 0, target: 12, distance:  -50},
+{source: 0, target: 13, distance:  20},
+{source: 0, target: 14, distance:  70},
+{source: 0, target: 15, distance:  40},
+{source: 0, target: 16, distance:  -20},
+{source: 0, target: 17, distance:  70},
+{source: 0, target: 18, distance:  20},
+{source: 0, target: 19, distance:  20},
+{source: 0, target: 20, distance:  -60},
+{source: 0, target: 21, distance:  -50},
+{source: 0, target: 22, distance:  -90},
+{source: 0, target: 23, distance:  -80},
+{source: 0, target: 24, distance:  -20},
+{source: 0, target: 25, distance:  -90},
+{source: 0, target: 26, distance:  30},
+{source: 0, target: 27, distance:  -50},
+{source: 0, target: 28, distance:  -80},
+{source: 0, target: 29, distance:  -20},
+{source: 0, target: 30, distance:  -80},
+{source: 0, target: 31, distance:  80},
+{source: 0, target: 32, distance:  -80},
+{source: 0, target: 33, distance:  -20},
+{source: 0, target: 34, distance:  -99},
+{source: 0, target: 35, distance:  -90},
+{source: 0, target: 36, distance:  -50},
+{source: 0, target: 37, distance:  40},
+{source: 0, target: 38, distance: 70},
+{source: 0, target: 39, distance:  -80},
+{source: 0, target: 40, distance:  -70},
+{source: 0, target: 41, distance:  90},
+{source: 0, target: 42, distance:  -50},
+{source: 0, target: 43, distance:  -80},
+{source: 0, target: 44, distance:  -20},
+{source: 0, target: 45, distance:  -50},
+{source: 0, target: 46, distance:  -100},
+{source: 0, target: 47, distance:  -20},
+{source: 0, target: 48, distance: -20},
+{source: 0, target: 49, distance:  -80},
+{source: 0, target: 50, distance:  -20},
+{source: 0, target: 51, distance:  -20},
+{source: 0, target: 52, distance:  -20},
+{source: 0, target: 53, distance:  -20},
+{source: 0, target: 54, distance:  -80},
+{source: 0, target: 55, distance:  -50},
+{source: 0, target: 56, distance:  30},
+{source: 0, target: 57, distance:  -50},
+{source: 0, target: 58, distance:  -90},
+{source: 0, target: 59, distance:  -50},
+{source: 0, target: 60, distance:  20},
+{source: 0, target: 61, distance:  20},
+{source: 0, target: 62, distance:  60},
+{source: 0, target: 63, distance:  85},
+{source: 0, target: 64, distance:  80},
+{source: 0, target: 65, distance:  40},
+{source: 0, target: 66, distance:  -90},
+{source: 0, target: 67, distance:  1},
+{source: 0, target: 68, distance:  80},
+{source: 0, target: 69, distance:  80},
+{source: 0, target: 70, distance: 50},
+{source: 0, target: 71, distance:  -20},
+{source: 0, target: 72, distance:  90},
+{source: 0, target: 73, distance:  -20},
+{source: 0, target: 74, distance:  -50},
+{source: 0, target: 75, distance:  -50},
+{source: 0, target: 76, distance:  -50},
+{source: 0, target: 77, distance:  20},
+{source: 0, target: 78, distance:  0},
+{source: 0, target: 79, distance:  -50},
+{source: 0, target: 80, distance:  -20},
+{source: 0, target: 81, distance:  -20},
+{source: 0, target: 82, distance:  -80},
+{source: 0, target: 83, distance:  -80},
+{source: 0, target: 84, distance:  20},
+{source: 0, target: 85, distance:  60},
+{source: 0, target: 86, distance:  80},
+{source: 0, target: 87, distance:  -80},
+{source: 0, target: 88, distance:  80},
+{source: 0, target: 89, distance:  -90},
+{source: 0, target: 90, distance:  50},
+{source: 0, target: 91, distance:  20},
+{source: 0, target: 92, distance:  20},
+{source: 0, target: 93, distance:  -50},
+{source: 0, target: 94, distance:  -90},
+{source: 0, target: 95, distance:  -80},
+{source: 0, target: 96, distance:  80},
+{source: 0, target: 97, distance:  1},
+{source: 0, target: 98, distance:  90},
+{source: 0, target: 99, distance:  -95},
+{source: 0, target: 100, distance:  60},
+{source: 0, target: 101, distance:  60},
+{source: 0, target: 102, distance:  60},
+{source: 0, target: 103, distance:  60},
+{source: 0, target: 104, distance: -50},
+{source: 0, target: 105, distance:  -100},
+{source: 0, target: 106, distance:  -100},
+{source: 0, target: 107, distance:  20},
+{source: 0, target: 108, distance:  90},
+{source: 0, target: 109, distance:  20},
+{source: 0, target: 110, distance:  -50},
+{source: 0, target: 111, distance:  -80},
+{source: 0, target: 112, distance:  70},
+{source: 0, target: 113, distance:  40},
+{source: 0, target: 114, distance:  -20},
+{source: 0, target: 115, distance:  -50},
+{source: 0, target: 116, distance:  95},
+{source: 0, target: 117, distance:  50},
+{source: 0, target: 118, distance:  15},
+{source: 0, target: 119, distance:  40},
+{source: 0, target: 120, distance:  10},
+{source: 0, target: 121, distance:  35},
+{source: 0, target: 122, distance:  50},
+{source: 0, target: 123, distance:  28},
+{source: 0, target: 124, distance:  -80},
+{source: 0, target: 125, distance:  -20},
+{source: 0, target: 126, distance:  -50},
+{source: 0, target: 127, distance:  5},
+{source: 0, target: 128, distance:  30},
+{source: 0, target: 129, distance:  15},
+{source: 0, target: 130, distance:  0},
+{source: 0, target: 131, distance:  40},
+{source: 0, target: 132, distance:  20},
+{source: 0, target: 133, distance:  40},
+{source: 0, target: 134, distance:  -100},
+{source: 0, target: 135, distance:  20},
+{source: 0, target: 136, distance:  40},
+{source: 0, target: 137, distance:  90},
+{source: 0, target: 138, distance:  50},
+{source: 0, target: 139, distance:  90},
+{source: 0, target: 140, distance:  95},
+{source: 0, target: 141, distance:  40},
+{source: 0, target: 142, distance:  60},
+{source: 0, target: 143, distance:  95},
+{source: 0, target: 144, distance:  75},
+{source: 0, target: 145, distance:  90},
+{source: 0, target: 146, distance:  50},
+{source: 0, target: 147, distance:  95},
+{source: 0, target: 148, distance:  20},
+{source: 0, target: 149, distance:  -30},
+{source: 0, target: 150, distance:  90},
+{source: 0, target: 151, distance:  -90},
+{source: 0, target: 152, distance:  10},
+{source: 0, target: 153, distance:  40},
+{source: 0, target: 154, distance:  5}
+ ]
+
+
+ var svg = d3.select("svg"),
+    width = +svg.attr("width"),
+    height = +svg.attr("height");
+
+
+var simulation = d3.forceSimulation(nodes)
+	.force('charge', d3.forceManyBody().strength(-100))
+	.force('center', d3.forceCenter(width / 2, height / 2))
+	// .force('collide', d3.forceCollide(function(d){
+	// 	console.log(d.name.length);
+	// 	return d.name.length*4;
+	// }))
+	.force('link', d3.forceLink().iterations(10).distance(function(d){
+        const x = d3.scaleLinear([-100, 95], [800, 100]);
+		//console.log(""+d.target.distance+" => " + x(d.target.distance)+ " - " + d.target.name);
+	
+
+        return x(d.target.distance);
+
+    }).links(links))
+	.on('tick', ticked);
+
+/*
+ar simulation = d3.forceSimulation(nodes)
+	.force('charge', d3.forceManyBody().strength(-840))
+	.force('center', d3.forceCenter(width / 2, height / 2))
+	.force('collide', d3.forceCollide((d) => 35))
+	.force('link', d3.forceLink().iterations(10).distance(function(d){
+        const x = d3.scaleLinear([-100, 100], [850, 100]);
+		console.log(""+d.target.distance+" => " + x(d.target.distance)+ " - " + d.target.name);
+	
+
+        return x(d.target.distance);
+
+    }).links(links))
+	.on('tick', ticked);
+
+
+*/
+
+
+function updateLinks() {
+	var u = d3.select('.links')
+		.selectAll('line')
+		.data(links)
+		.join('line')
+        .attr("stroke-width", function(d) { 
+            const x = d3.scaleLinear([-100, 100], [1, 100]);
+            
+            return Math.sqrt(x(d.target.distance)); })
+		.attr('x1', function(d) {
+			return d.source.x
+		})
+		.attr('y1', function(d) {
+			return d.source.y
+		})
+		.attr('x2', function(d) {
+			return d.target.x
+		})
+		.attr('y2', function(d) {
+			return d.target.y
+		});
+}
+
+function updateNodes() {
+    d3.select('.nodes').select('text').append("circle")
+    .attr("cx", width/2)
+    .attr("cy", height/2)
+    .attr("r", 50)
+    .style("stroke", "#fff")
+    .style("fill", "#fffff00")
+    .attr('fill-opacity', 0.0);
+
+	var u = d3.select('.nodes')
+		.selectAll('text')
+		.data(nodes)
+		.join('text')
+		.text(function(d) {
+			return d.name
+		})
+		.attr('x', function(d) {
+			return d.x
+		})
+		.attr('y', function(d) {
+			return d.y
+		})
+		.attr('dy', function(d) {
+			return 5
+		});
+
+        var u = d3.select('.nodes')
+		.selectAll('text')
+		.data(nodes)
+		.join('text')
+		.attr('cx', function(d) {
+			return d.x
+		})
+		.attr('cy', function(d) {
+			return d.y
+		})
+		.attr('dy', function(d) {
+			return 5
+		})
+		.call(d3.drag()
+          .on("start", dragstarted)
+          .on("drag", dragged)
+          .on("end", dragended));
+
+		
+		;
+
+        
+}
+
+function ticked() {
+	updateLinks()
+	updateNodes()
+}
+
+function dragstarted(event) {
+	console.log(event);
+	if(!event.active) {
+		simulation.alpha(.5);
+		simulation.alphaTarget(0.3).restart();}
+	event.subject.x = event.x;
+	event.subject.y = event.y;
+}
+
+function dragged(event) {
+	event.subject.x = event.x;
+	event.subject.y = event.y;
+	//event.subject.distance = event.distance;
+}
+
+function dragended(event) {
+	console.log(event);
+	if(!event.active) simulation.alphaTarget(0);
+	event.subject.x = event.x;
+	event.subject.y = event.y;
+	//event.subject.distance = 10;
+
+}
+</script>
