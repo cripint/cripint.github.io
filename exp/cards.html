@@ -168,14 +168,14 @@ class PokemonCard extends React.Component {
 
     $.get(pokemonUrl).done(data => {
       let d = [{ pokemon: {name: "Change Role", sprite: "img/go.png", describe: "Change who the AI thinks it is", example: "You are a cat.", stats:{}}},
-               { pokemon: {name: "Check Values", sprite: "img/go.png", describe: "Test", example: "",  stats:{}}},
-               { pokemon: {name: "Change Context", sprite: "img/go.png", describe: "Change the situation", example: "", stats:{}}},
-               { pokemon: {name: "Draw it ", sprite: "img/go.png", describe: "Draw a picture", stats:{} }},
-               { pokemon: {name: "Make it Worse", sprite: "img/go.png", describe: "Turn the last answer worse", stats:{}}},
-               { pokemon: {name: "Make it Better", sprite: "img/go.png", describe: "Turn the last answer better", stats:{}}},
-               { pokemon: {name: "Explain", sprite: "img/go.png", describe: "Explain why the last answer was given", stats:{}}},
-               { pokemon: {name: "Rate", sprite: "img/go.png", describe: "Rate something", stats:{}}},
-               { pokemon: {name: "Fill in the blank", sprite: "img/go.png", describe: "Fill in a missing word", stats:{}}}
+               { pokemon: {name: "Moral test", sprite: "img/go.png", describe: "Check what the AI values", example: "There is a fly on the track that will die.",  stats:{}}},
+               { pokemon: {name: "Context Change ", sprite: "img/go.png", describe: "Tell the AI its in a new situation", example: "You are now only allowed to reply in sea shanty songs", stats:{}}},
+               { pokemon: {name: "Draw it ", sprite: "img/go.png", describe: "Ask the AI to draw a picture from previous chat", example: "Draw it", stats:{} }},
+               { pokemon: {name: "Make it Worse", sprite: "img/go.png", describe: "Turn the last answer worse. Whats worse to it?", example: "Make it worse", stats:{}}},
+               { pokemon: {name: "Make it Better", sprite: "img/go.png", describe: "Turn the last answer better. Whats better to it?", example: "MAke it better", stats:{}}},
+               { pokemon: {name: "Explain", sprite: "img/go.png", describe: "Explain why the last answer was given", example:"Explain your answer", stats:{}}},
+               { pokemon: {name: "Rate", sprite: "img/go.png", describe: "Get the AI to score something on a scale of 0-10", example: "Give a rating from 0 (bad) to 10 good for the following statement 'access is beautiful'", stats:{}}},
+               { pokemon: {name: "Fill in the blank", sprite: "img/go.png", describe: "Get the AI to fill in a missing word", example: "Fill in the <blank>. The train is bad for <blank>.",  stats:{}}}
 
       ];
       console.log(this.props.pokeId % d.length);
