@@ -253,12 +253,12 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.generateCards = this.generateCards.bind(this);
-    const pokemon = randomNumbers(1, 10).slice(0, 10);
+    const pokemon = randomNumbers(1, 10).slice(0, 2);
     this.state = { pokemonIds: pokemon };
   }
 
   generateCards() {
-    const pokemon = randomNumbers(1, 10).slice(0, 10);
+    const pokemon = randomNumbers(1, 10).slice(0, 2);
     this.setState({ pokemonIds: pokemon });
   }
 
