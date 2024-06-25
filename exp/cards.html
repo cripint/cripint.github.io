@@ -16,6 +16,10 @@
     <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-2c7831bb44f98c1391d6a4ffda0e1fd302503391ca806e7fcc7b9b87197aec26.js"></script>
 
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
   <title>CodePen - Pokemon Cards</title>
 
     <link rel="canonical" href="https://codepen.io/josephwilk/pen/qBGYYad">
@@ -26,10 +30,28 @@
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css'>
   
 <style>
+
+.raleway-big {
+  font-family: "Raleway", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
 body {
-  background-color: rgb(0, 79, 13);
+  background-color: rgb(253, 253, 241);
   font-family: Puritan, Helvetica, sans-serif;
   font-size: 2.0em;
+  background: url("background.jpeg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.top-hr{
+  border-top: 9px solid rgba(0,0,0,0.2);
+  width: 90%;
 }
 
 .app-header {
@@ -55,43 +77,69 @@ body {
   flex-wrap: wrap;
 }
 
+
+.pokemon-card-outer {
+  /*box-shadow: 0 0 3px -1px transparent, 0 0 2px 1px transparent, 0 0 5px 0px transparent,0px 10px 20px -5px black, 0 2px 15px -5px black,0 0 20px 0px transparent;*/
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  border-radius: 4px;
+  display: flex;
+  opacity: 0.95;
+  background: linear-gradient(rgba(237, 237, 237, 0.91), rgba(209, 209, 209, 0.79)), url("card_a4.jpeg") repeat;
+
+  background-position: center;
+  background-size: cover;
+
+  flex-direction: column;
+  align-items: center;
+  margin: 10px 10px;
+  width: 406px;
+  min-height: 470px;
+}
+
 .pokemon-card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 10px 10px;
-  width: 450px;
-  min-height: 300px;
-  border: 1px solid rgb(1, 43, 9);
-  box-shadow: 3px 3px rgb(58, 58, 58);
-  background: white;
-  border-radius: 10px;
+  min-height: 470px; 
+  
+  background-size: cover;
+  
+  border-radius: 1px;
+
+
 }
 .pokemon-card .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   min-height: 70px;
-  width: 100%;
   padding: 0 10px;
 }
 .pokemon-card .header h2, .pokemon-card .header div {
   padding: 0 10px;
+  margin-top: 20px;
+margin-bottom: 0px;
+  font-family: "Raleway", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+
 }
 .pokemon-card .pokemon-image {
   display: flex;
   justify-content: center;
   width: 100%;
   min-height: 130px;
-  background-color: #d2fcb4;
+  background-color: #fdfff7;
 }
 .pokemon-card .pokemon-info {
-  min-height: 18px;
-  width: 100%;
-  padding: 5px 0;
+  min-height: 90px;
+  width: 90%;
+  padding: 5px;
   margin-bottom: 15px;
-  background-color: rgb(232, 250, 223);
+  background-color: rgba(255, 255, 255, 0.8);
   text-align: center;
+  border-radius: 4px;
 }
 .pokemon-card .main-content {
   display: flex;
@@ -103,7 +151,6 @@ body {
 }
 .pokemon-card .main-content .national-id {
   padding-left: 10px;
-  text-align: center;
 }
 .pokemon-card .main-content .national-id h3,
 .pokemon-card .main-content .national-id p {
@@ -223,10 +270,15 @@ class CardContent extends React.Component {
     const pokemon = this.pokemonData();
 
     return /*#__PURE__*/(
+
+
+    React.createElement("div", { className: "pokemon-card-outer" }, /*#__PURE__*/
       React.createElement("div", { className: "pokemon-card" }, /*#__PURE__*/
       React.createElement("div", { className: "header" }, /*#__PURE__*/
       React.createElement("h2", null, capitalize(pokemon.name)), /*#__PURE__*/
       ), /*#__PURE__*/
+
+      React.createElement("hr", {className: "top-hr"}, ""), 
 
       React.createElement("div", { className: "pokemon-info" }, pokemon.describe), /*#__PURE__*/
 
@@ -241,7 +293,8 @@ class CardContent extends React.Component {
 
     )
     )
-    );
+    )
+  );
 
 
 
@@ -282,9 +335,9 @@ class App extends React.Component {
 class Pokeball extends React.Component {
   render() {
     return /*#__PURE__*/(
-      React.createElement("div", { className: "pokeball" }, /*#__PURE__*/
-      React.createElement("div", { className: "button" }, /*#__PURE__*/
-      React.createElement("div", { className: "button-inner" }))));
+      React.createElement("div", { className: "pokeball" }, "Ministry of AI Spills" /*#__PURE__*/
+       /*#__PURE__*/
+      ));
   }}
 
 
