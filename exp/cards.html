@@ -50,7 +50,7 @@ body {
 }
 
 .top-hr{
-  border-top: 9px solid rgba(0,0,0,0.2);
+  border-top: 11px dashed rgba(255, 151, 0, 0.7);
   width: 90%;
 }
 
@@ -92,8 +92,8 @@ body {
   flex-direction: column;
   align-items: center;
   margin: 10px 10px;
-  width: 406px;
-  min-height: 470px;
+  width: 430px;
+  min-height: 530px;
 }
 
 .pokemon-card {
@@ -133,7 +133,7 @@ margin-bottom: 0px;
   background-color: #fdfff7;
 }
 .pokemon-card .pokemon-info {
-  min-height: 90px;
+  min-height: 111px;
   width: 90%;
   padding: 5px;
   margin-bottom: 15px;
@@ -141,6 +141,12 @@ margin-bottom: 0px;
   text-align: center;
   border-radius: 4px;
 }
+
+p.example{
+  font-weight: 100;
+  font-style: italic;
+}
+
 .pokemon-card .main-content {
   display: flex;
   justify-content: space-between;
@@ -219,7 +225,7 @@ class PokemonCard extends React.Component {
                { pokemon: {name: "Context Change ", sprite: "img/go.png", describe: "Tell the AI its in a new situation", example: "You are now only allowed to reply in sea shanty songs", stats:{}}},
                { pokemon: {name: "Draw it ", sprite: "img/go.png", describe: "Ask the AI to draw a picture from previous chat", example: "Draw it", stats:{} }},
                { pokemon: {name: "Make it Worse", sprite: "img/go.png", describe: "Turn the last answer worse. Whats worse to it?", example: "Make it worse", stats:{}}},
-               { pokemon: {name: "Make it Better", sprite: "img/go.png", describe: "Turn the last answer better. Whats better to it?", example: "MAke it better", stats:{}}},
+               { pokemon: {name: "Make it Better", sprite: "img/go.png", describe: "Turn the last answer better. Whats better to it?", example: "Make it better", stats:{}}},
                { pokemon: {name: "Explain", sprite: "img/go.png", describe: "Explain why the last answer was given", example:"Explain your answer", stats:{}}},
                { pokemon: {name: "Rate", sprite: "img/go.png", describe: "Get the AI to score something on a scale of 0-10", example: "Give a rating from 0 (bad) to 10 good for the following statement 'access is beautiful'", stats:{}}},
                { pokemon: {name: "Fill in the blank", sprite: "img/go.png", describe: "Get the AI to fill in a missing word", example: "Fill in the <blank>. The train is bad for <blank>.",  stats:{}}}
@@ -289,7 +295,9 @@ class CardContent extends React.Component {
       React.createElement("div", { className: "main-content" }, /*#__PURE__*/
       React.createElement("div", { className: "national-id" }, /*#__PURE__*/
       React.createElement("h3", null, pokemon.id), /*#__PURE__*/
-      React.createElement("p", null, "Usage: "+ pokemon.example)), /*#__PURE__*/
+      React.createElement("p", null, "Usage: "), 
+      React.createElement("p", {className: "example" },  pokemon.example)), /*#__PURE__*/
+      /*#__PURE__*/
 
     )
     )
