@@ -238,28 +238,23 @@ class PokemonCard extends React.Component {
   getPokemonData() {
     const pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${this.props.pokeId}`;
 
-    $.get(pokemonUrl).done(data => {
-      let d = [{ pokemon: {name: "Change Role", sprite: "img/go.png", describe: "Change who the AI thinks it is", example: "You are a cat.", stats:{}}},
-               { pokemon: {name: "Moral test", sprite: "img/go.png", describe: "Check what the AI values", example: "There is a fly on the track that will die.",  stats:{}}},
-               { pokemon: {name: "Context Change ", sprite: "img/go.png", describe: "Tell the AI its in a new situation", example: "You are now only allowed to reply in sea shanty songs", stats:{}}},
-               { pokemon: {name: "Draw it ", sprite: "img/go.png", describe: "Ask the AI to draw a picture from previous chat", example: "Draw it", stats:{} }},
-               { pokemon: {name: "Worse!", sprite: "img/go.png", describe: "Turn the last answer worse. Whats worse to it?", example: "Make it worse", stats:{}}},
-               { pokemon: {name: "Better!", sprite: "img/go.png", describe: "Turn the last answer better. Whats better to it?", example: "Make it better", stats:{}}},
-               { pokemon: {name: "Explain", sprite: "img/go.png", describe: "Explain why the last answer was given", example:"Explain your answer", stats:{}}},
-               { pokemon: {name: "Rate", sprite: "img/go.png", describe: "Get the AI to score something on a scale of 0-10", example: "Give a rating from 0 (bad) to 10 good for the following statement 'access is beautiful'", stats:{}}},
-               { pokemon: {name: "Fill in the blank", sprite: "img/go.png", describe: "Get the AI to fill in a missing word", example: "Fill in the <blank>. The train is bad for <blank>.",  stats:{}}},
-               { pokemon: {name: "Question", sprite: "img/go.png", describe: "Get the AI to ask you a question", example: "If you could ask me any question what would it be?",  stats:{}}},
+    $.get('').done(data => {
+      let d = [{ pokemon: {name: "Change Role", sprite: "img/go.png", describe: "Change who the AI thinks it is", example: "> You are a cat.", stats:{}}},
+               { pokemon: {name: "Moral test", sprite: "img/go.png", describe: "Check what the AI values", example: "> There is a fly on the track that will die.",  stats:{}}},
+               { pokemon: {name: "Context Change ", sprite: "img/go.png", describe: "Tell the AI its in a new situation", example: "> You are now only allowed to reply in sea shanty songs", stats:{}}},
+               { pokemon: {name: "Draw it ", sprite: "img/go.png", describe: "Ask the AI to draw a picture from previous chat", example: "> Draw it", stats:{} }},
+               { pokemon: {name: "Worse!", sprite: "img/go.png", describe: "Turn the last answer worse. Whats worse to it?", example: "> Make it worse", stats:{}}},
+               { pokemon: {name: "Better!", sprite: "img/go.png", describe: "Turn the last answer better. Whats better to it?", example: "> Make it better", stats:{}}},
+               { pokemon: {name: "Explain", sprite: "img/go.png", describe: "Explain why the last answer was given", example:"> Explain your answer", stats:{}}},
+               { pokemon: {name: "Rate", sprite: "img/go.png", describe: "Get the AI to score something on a scale of 0-10", example: "> Give a rating from 0 (bad) to 10 good for the following statement 'access is beautiful'", stats:{}}},
+               { pokemon: {name: "Fill in the blank", sprite: "img/go.png", describe: "Get the AI to fill in a missing word", example: "> Fill in the <blank>. The train is bad for <blank>.",  stats:{}}},
+               { pokemon: {name: "Question", sprite: "img/go.png", describe: "Get the AI to ask you a question", example: "> If you could ask me any question what would it be?",  stats:{}}},
 
-
-               { pokemon: {name: "Made up words", sprite: "img/go.png", describe: "Get the AI to only reply in made-up words", example: "You must only reply in made up words. Make them sound as real as possible.",  stats:{}}},
-               { pokemon: {name: "Non-sense", sprite: "img/go.png", describe: "Get the AI to construct sentences that don't make sense", example: "Never make sense.",  stats:{}}}
-               
-               
-
-
-
+               { pokemon: {name: "Made up words", sprite: "img/go.png", describe: "Get the AI to only reply in made-up words", example: "> You must only reply in made up words. Make them sound as real as possible.",  stats:{}}},
+               { pokemon: {name: "Nonsense", sprite: "img/go.png", describe: "Get the AI to construct sentences that don't make sense", example: "> Never make sense.",  stats:{}}}
       ];
       console.log(this.props.pokeId % d.length);
+      console.log(this.props.pokeId);
       this.setState(d[this.props.pokeId % d.length]);
     });
   }
@@ -342,12 +337,12 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.generateCards = this.generateCards.bind(this);
-    const pokemon = randomNumbers(1, 10).slice(0, 2);
+    const pokemon = randomNumbers(0, 12).slice(0, 2);
     this.state = { pokemonIds: pokemon };
   }
 
   generateCards() {
-    const pokemon = randomNumbers(1, 10).slice(0, 2);
+    const pokemon = randomNumbers(0, 12).slice(0, 2);
     this.setState({ pokemonIds: pokemon });
   }
 
