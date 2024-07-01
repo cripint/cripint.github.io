@@ -3,24 +3,14 @@
 
 <head>
   <meta charset="UTF-8">
-  
-
-    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
-
-    <meta name="apple-mobile-web-app-title" content="CodePen">
-
-    <link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
-
     <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
-  
     <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-2c7831bb44f98c1391d6a4ffda0e1fd302503391ca806e7fcc7b9b87197aec26.js"></script>
-
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
-  <title>CodePen - Pokemon Cards</title>
+  <title>Ministry of AI Spills - Cards</title>
 
     <link rel="canonical" href="https://codepen.io/josephwilk/pen/qBGYYad">
   
@@ -258,7 +248,15 @@ class PokemonCard extends React.Component {
                { pokemon: {name: "Explain", sprite: "img/go.png", describe: "Explain why the last answer was given", example:"Explain your answer", stats:{}}},
                { pokemon: {name: "Rate", sprite: "img/go.png", describe: "Get the AI to score something on a scale of 0-10", example: "Give a rating from 0 (bad) to 10 good for the following statement 'access is beautiful'", stats:{}}},
                { pokemon: {name: "Fill in the blank", sprite: "img/go.png", describe: "Get the AI to fill in a missing word", example: "Fill in the <blank>. The train is bad for <blank>.",  stats:{}}},
-               { pokemon: {name: "Question", sprite: "img/go.png", describe: "Get the AI to ask you a question", example: "If you could ask me any question what would it be?",  stats:{}}}
+               { pokemon: {name: "Question", sprite: "img/go.png", describe: "Get the AI to ask you a question", example: "If you could ask me any question what would it be?",  stats:{}}},
+
+
+               { pokemon: {name: "Made up words", sprite: "img/go.png", describe: "Get the AI to only reply in made-up words", example: "You must only reply in made up words. Make them sound as real as possible.",  stats:{}}},
+               { pokemon: {name: "Non-sense", sprite: "img/go.png", describe: "Get the AI to construct sentences that don't make sense", example: "Never make sense.",  stats:{}}}
+               
+               
+
+
 
       ];
       console.log(this.props.pokeId % d.length);
