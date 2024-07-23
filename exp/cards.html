@@ -239,18 +239,23 @@ class PokemonCard extends React.Component {
     const pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${this.props.pokeId}`;
 
     $.get('').done(data => {
-      let d = [{ pokemon: {name: "Change Role", sprite: "img/go.png", describe: "Change who the AI thinks it is", example: "> You are a cat.", stats:{}}},
-               { pokemon: {name: "Moral test", sprite: "img/go.png", describe: "Check what the AI values", example: "> There is a fly on the track that will die.",  stats:{}}},
-               { pokemon: {name: "Context Change ", sprite: "img/go.png", describe: "Tell the AI its in a new situation", example: "> You are now only allowed to reply in sea shanty songs", stats:{}}},
-               { pokemon: {name: "Draw it ", sprite: "img/go.png", describe: "Ask the AI to draw a picture from previous chat", example: "> Draw it", stats:{} }},
-               { pokemon: {name: "Worse!", sprite: "img/go.png", describe: "Turn the last answer worse. Whats worse to it?", example: "> Make it worse", stats:{}}},
-               { pokemon: {name: "Better!", sprite: "img/go.png", describe: "Turn the last answer better. Whats better to it?", example: "> Make it better", stats:{}}},
-               { pokemon: {name: "Explain", sprite: "img/go.png", describe: "Explain why the last answer was given", example:"> Explain your answer", stats:{}}},
+      let d = [{ pokemon: {name: "Not Facts", sprite: "img/go.png", describe: "Find a fact that is not a fact.", example: ">Who was the first elephant to swim the channel.", stats:{}}},
+               { pokemon: {name: "Familiar", sprite: "img/go.png", describe: "Find something in the output that feels familiar.", example: ">Draw a video game plumber.",  stats:{}}},
+               { pokemon: {name: "Values", sprite: "img/go.png", describe: "Find a value the AI holds. ", example: ">You are driving a car and will hit a bee and kill it. Do you stop", stats:{}}},
+               { pokemon: {name: "Interesting", sprite: "img/go.png", describe: "Find an interesting question it wants to ask you.", example: "Ask me the most interesting question you can imagine.", stats:{} }},
+               { pokemon: {name: "Ambiguous", sprite: "img/go.png", describe: "Be ambiguous. Find something in asking the AI to draw “it”", example: ">Draw “them” >Draw “he” >Draw “ze", stats:{} }},
+               { pokemon: {name: "Skills", sprite: "img/go.png", describe: "Find something the AI thinks it's good at and disprove it.", example: "Describe a task you are good at and then show with an example you are bad at that task.", stats:{} }},
+               { pokemon: {name: "Leading", sprite: "img/go.png", describe: "Leading questions. Find a way to make the AI say something obviously incorrect.", example: "Suggest a question that you will answer incorrectly.", stats:{} }},
+               { pokemon: {name: "Blocked", sprite: "img/go.png", describe: "Find something non-harmful that the AI is blocked from doing or saying.", stats:{} }},
+               { pokemon: {name: "Context", sprite: "img/go.png", describe: "Find if it feels different in a new context. ", example: "You are now only allowed to reply in sea shanty songs", stats:{} }},
+               { pokemon: {name: "Role", sprite: "img/go.png", describe: "Make the AI change its role, find something interesting in the difference.", example: ">You are a cat.", stats:{} }},
+               { pokemon: {name: "Worse!", sprite: "img/go.png", describe: "Where does “make it worse” lead?",  example: ">Make it worse.", stats:{}}},
+               { pokemon: {name: "Better!", sprite: "img/go.png", describe: "Where does “make it better” lead?", example: ">Make it better", stats:{}}},              
+               { pokemon: {name: "Drawing", sprite: "img/go.png", describe: "Find a bias in the drawings the AI creates.", example: ">Draw a picture", stats:{}}},
                { pokemon: {name: "Rate", sprite: "img/go.png", describe: "Get the AI to score something on a scale of 0-10", example: "> Give a rating from 0 (bad) to 10 good for the following statement 'access is beautiful'", stats:{}}},
                { pokemon: {name: "Fill in the blank", sprite: "img/go.png", describe: "Get the AI to fill in a missing word", example: "> Fill in the <blank>. The train is bad for <blank>.",  stats:{}}},
                { pokemon: {name: "Question", sprite: "img/go.png", describe: "Get the AI to ask you a question", example: "> If you could ask me any question what would it be?",  stats:{}}},
-
-               { pokemon: {name: "Made up words", sprite: "img/go.png", describe: "Get the AI to only reply in made-up words", example: "> You must only reply in made up words. Make them sound as real as possible.",  stats:{}}},
+               { pokemon: {name: "Made up words", sprite: "img/go.png", describe: "Get the AI to construct sentences that don't make sense. Find meaning in the mess.",  example:"Describe an wheelchair in made up words", stats:{}}},
                { pokemon: {name: "Nonsense", sprite: "img/go.png", describe: "Get the AI to construct sentences that don't make sense", example: "> Never make sense.",  stats:{}}}
       ];
       console.log(this.props.pokeId % d.length);
@@ -337,12 +342,12 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.generateCards = this.generateCards.bind(this);
-    const pokemon = randomNumbers(0, 12).slice(0, 2);
+    const pokemon = randomNumbers(0, 18).slice(0, 1);
     this.state = { pokemonIds: pokemon };
   }
 
   generateCards() {
-    const pokemon = randomNumbers(0, 12).slice(0, 2);
+    const pokemon = randomNumbers(0, 18).slice(0, 1);
     this.setState({ pokemonIds: pokemon });
   }
 
